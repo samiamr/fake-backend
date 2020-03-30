@@ -47,12 +47,12 @@ func main() {
 		err = db.Ping()
 		if err != nil {
 			w.WriteHeader(http.StatusInternalServerError)
-			w.Write([]byte("ko"))
+			logerr(w.Write([]byte("ko")))
 			return
 		}
 
 		w.WriteHeader(http.StatusOK)
-		w.Write([]byte("ok"))
+		logerr(w.Write([]byte("ok")))
 	})
 
 	log.Println("Listening on port 3000 ...")
