@@ -45,14 +45,15 @@ func main() {
 	// Health Check
 	http.HandleFunc("/health", func(w http.ResponseWriter, r *http.Request) {
 		err = db.Ping()
+		w = LogWriter{w}
 		if err != nil {
 			w.WriteHeader(http.StatusInternalServerError)
-			logerr(w.Write([]byte("ko")))
+			w.Write([]byte("ko"))
 			return
 		}
 
 		w.WriteHeader(http.StatusOK)
-		logerr(w.Write([]byte("ok")))
+		w.Write([]byte("ok"))
 	})
 
 	log.Println("Listening on port 3000 ...")
