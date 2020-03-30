@@ -45,7 +45,7 @@ func main() {
 	// Health Check
 	http.HandleFunc("/health", func(w http.ResponseWriter, r *http.Request) {
 		err = db.Ping()
-		w = LogWriter{w}
+		//w = LogWriter{w}
 		if err != nil {
 			w.WriteHeader(http.StatusInternalServerError)
 			w.Write([]byte("ko"))
